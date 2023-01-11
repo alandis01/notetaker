@@ -4,14 +4,27 @@ const PORT = process.env.PORT || 3001;
 const path = require('path');
 const app = express();
 
-const recorded = require("./db/db.json")
+// app.get('/', (req, res) => {
+//     res.send('Note Taker');
+// });
+
+const notes  = require("./db/db.json");
+// const { networkInterfaces } = require('os');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use (apiRoutes);
 
+function newNote (body, notesArray) {
+const note = body;
+notesArray.push(note);
+fs.writeFileSync(
+    path.join(__dirname, './db/db.json'),
+    JSON.stringify({ notes: notesArray })
+)
 
+}
 
 app.get('/', (req, res) => {
 res.sendFile(path.join(__dirname, '/public/index.html'))
