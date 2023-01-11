@@ -16,15 +16,17 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use (apiRoutes);
 
+const uniqueID = require('unique-id');
+
 function newNote (body, notesArray) {
 const note = body;
 notesArray.push(note);
 fs.writeFileSync(
     path.join(__dirname, './db/db.json'),
     JSON.stringify({ notes: notesArray })
-)
-
-}
+);
+return note;
+};
 
 app.get('/', (req, res) => {
 res.sendFile(path.join(__dirname, '/public/index.html'))
@@ -32,6 +34,10 @@ res.sendFile(path.join(__dirname, '/public/index.html'))
 
 app.get('/', (req,res) => {
 res.sendFile(path.join(__dirname, '/public/notes.html'))
+});
+
+app.get('/api/notes', (req,res) => {
+res.json(notes);
 });
 
 
