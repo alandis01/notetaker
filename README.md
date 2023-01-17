@@ -4,10 +4,15 @@
 
 ## Table of Contents 
 -[Description of Project](#description-of-project)
+
 -[Installation](#installation)
+
 -[Visuals](#visuals)
+
 -[License](#license)
+
 -[Contributing](#contributing)
+
 -[Questions](#questions)
 
 ## Description
